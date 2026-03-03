@@ -7,4 +7,4 @@ CMake_minimum_required(VERSION 3.10)
 Project(Tonality)
 
 # Add the executable target
-Add_executable(Tonality main.cpp)
+Add_executable(Tonality Music_input.cpp)
