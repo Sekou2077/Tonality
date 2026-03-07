@@ -17,10 +17,16 @@ int main() {
         return 1;
     }
  
-    std::cout << "PortAudio initialized beautifully!\n";
+    // set up input parameters
+    PaStreamParameters inputParameters;
+    inputParameters.device = Pa_GetDefaultInputDevice(); // default input device
+    inputParameters.channelCount = 2; // stereo input
+    inputParameters.sampleFormat = paFloat32; // 32 bit floating point compatible with most audio APIs
+    inputParameters.suggestedLatency = Pa_GetDeviceInfo(inputParameters.device)->defaultLowInputLatency;// use default low latency settings
+    inputParameters.hostApiSpecificStreamInfo = NULL; // no specific stream info
+    
 
-    int numDevices = Pa_GetDeviceCount();
-    std::cout << "Number of audio devices: " << numDevices << "\n";
 
+    // Terminate PortAudio
     Pa_Terminate();
 }
