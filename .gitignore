@@ -1,6 +1,5 @@
 .vscode/
 build/
-portaudio/ 
 *.log
 *.tmp
 *.exe
