@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <portaudio.h>
-
+#include <vector>
 
 using namespace std;
 
@@ -25,9 +25,13 @@ int main() {
     inputParameters.suggestedLatency = Pa_GetDeviceInfo(inputParameters.device)->defaultLowInputLatency;// use default low latency settings
     inputParameters.hostApiSpecificStreamInfo = NULL; // no specific stream info
     
-    // Define constants for sample rate and frames per buffer
+    // Define constants for sample rate ,frames per buffer and recording duration
     const int Sample_rate = 44100; // standard CD quality sample rate
     const int Frames_per_buffer = 256; // small buffer size for low latency
+    const int Recording_duration_seconds = 60; // record for 60 seconds
+
+    //declare a buffer to hold the recorded audio data
+    std::vector<float> Sampleblock(Frames_per_buffer * inputParameters.channelCount); 
 
 
     // Declare a stream pointer
@@ -52,7 +56,27 @@ int main() {
         return 1;
     }
 
-// Start the stream
+    // Start the stream
+    err = Pa_StartStream(stream);
+    // Check if stream started successfully
+    if (err != paNoError) {
+        std::cout << "Failed to start the stream!\n";
+        Pa_CloseStream(stream);
+        Pa_Terminate();
+        return 1;
+    }
+    else {
+        std::cout << "Stream started successfully! Recording...\n"<< std::endl;
+    }
+
+
+    // Main audio processing loop
+    for (int i=0; i < (Recording_duration_seconds * Sample_rate) / Frames_per_buffer; ++i)
+     {
+        err=Pa_ReadStream(stream, Sampleblock.data(), Frames_per_buffer);
+
+
+    }
 
 
 
