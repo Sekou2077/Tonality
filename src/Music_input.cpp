@@ -74,11 +74,27 @@ int main() {
     for (int i=0; i < (Recording_duration_seconds * Sample_rate) / Frames_per_buffer; ++i)
      {
         err=Pa_ReadStream(stream, Sampleblock.data(), Frames_per_buffer);
-
+        if (err != paNoError) {
+            std::cout << "Failed to read from the stream!\n";
+            break;
+        }
 
     }
 
+    // Stop the stream
+    err = Pa_StopStream(stream);
+    // Check if stream stopped successfully
+    if (err != paNoError) {
+        std::cout << "Failed to stop the stream!\n";
+    }
 
+
+    // Close the stream
+    err = Pa_CloseStream(stream);
+    // Check if stream closed successfully
+    if (err != paNoError) {
+        std::cout << "Failed to close the stream!\n";
+    }
 
     // Terminate PortAudio
     Pa_Terminate();
