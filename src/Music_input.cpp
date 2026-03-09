@@ -95,6 +95,9 @@ int main() {
     if (err != paNoError) {
         std::cout << "Failed to close the stream!\n";
     }
+    else {
+        std::cout << "Stream closed successfully!\n";
+    }
 
     // Terminate PortAudio
     Pa_Terminate();
