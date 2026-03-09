@@ -28,7 +28,7 @@ int main() {
     // Define constants for sample rate ,frames per buffer and recording duration
     const int Sample_rate = 44100; // standard CD quality sample rate
     const int Frames_per_buffer = 256; // small buffer size for low latency
-    const int Recording_duration_seconds = 60; // record for 60 seconds
+    const int Recording_duration_seconds = 5; // record for 60 seconds
 
     //declare a buffer to hold the recorded audio data
     std::vector<float> Sampleblock(Frames_per_buffer * inputParameters.channelCount); 
