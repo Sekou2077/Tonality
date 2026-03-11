@@ -1,0 +1,35 @@
+// Author : Sekou Traore
+// Experimental project for music input and processing using graphs : Tonality
+
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+    std::cout << "Welcome to Tonality!" << std::endl;
+    char choice;
+    do {
+        std::cout << "Please select an option:\n";
+        std::cout << "1. Record music\n";
+        std::cout << "2. Exit\n";
+        std::cout << "Enter your choice: ";
+        std::cin >> choice;
+
+        switch (choice) {
+            case '1':
+                Audio_input();
+                break;
+            case '2':
+                std::cout << "Exiting Tonality. Goodbye!\n";
+                break;
+            default:
+                std::cout << "Invalid choice. Please try again.\n";
+                break;
+        }
+    } while (choice != '2');
+
+
+
+    return 0;
+}

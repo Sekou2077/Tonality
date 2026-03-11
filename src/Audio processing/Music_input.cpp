@@ -1,5 +1,4 @@
-// Author : Sekou Traore
-// Experimental project for music input and processing(just wild ideas for now)
+// Audio processing implementation files 
 
 #include <iostream>
 #include <portaudio.h>
@@ -7,7 +6,7 @@
 
 using namespace std;
 
-int main() {
+int Audio_input() {
     
      // Initialize PortAudio
      PaError err = Pa_Initialize();
