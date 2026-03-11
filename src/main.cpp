@@ -2,7 +2,7 @@
 // Experimental project for music input and processing using graphs : Tonality
 
 #include <iostream>
-#include "Audio processing/Music_input.h"
+#include "Audio_processing/Music_input.h"
 
 using namespace std;
 
