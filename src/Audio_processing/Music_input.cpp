@@ -70,15 +70,19 @@ int Audio_input() {
 
 
     // Main audio processing loop
+
     for (int i=0; i < (Recording_duration_seconds * Sample_rate) / Frames_per_buffer; ++i)
      {
         err=Pa_ReadStream(stream, Sampleblock.data(), Frames_per_buffer);
+        // Check if read was successful
         if (err != paNoError) {
             std::cout << "Failed to read from the stream!\n";
             break;
         }
 
     }
+
+
 
     // Stop the stream
     err = Pa_StopStream(stream);
