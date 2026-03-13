@@ -4,9 +4,9 @@
 #include <portaudio.h>
 #include <vector>
 
-using namespace std;
 
-int Audio_input() {
+
+int Audio_input(std::vector<float>& Recording) {
     
      // Initialize PortAudio
      PaError err = Pa_Initialize();
@@ -79,6 +79,8 @@ int Audio_input() {
             std::cout << "Failed to read from the stream!\n";
             break;
         }
+        // Append the recorded samples to the Recording vector
+        Recording.insert(Recording.end(), Sampleblock.begin(), Sampleblock.end());
 
     }
 

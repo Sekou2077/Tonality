@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
 
-    std::cout << "Welcome to Tonality!" << std::endl;
+    std::cout << "Welcome to Tonality a!" << std::endl;
     char choice;
     do {
         std::cout << "Please select an option:\n";
