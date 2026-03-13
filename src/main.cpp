@@ -20,6 +20,7 @@ int main() {
         switch (choice) {
             case '1':
                 std::vector<float> Recording; // Create a vector to hold the recorded audio data
+                Recording.clear(); // Clear the vector to ensure it's empty before recording
                 Audio_input(Recording); // Call the audio input function to fill the Recording vector with audio data
                 break;
             case '2':
