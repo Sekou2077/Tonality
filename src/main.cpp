@@ -19,7 +19,8 @@ int main() {
 
         switch (choice) {
             case '1':
-                Audio_input();
+                std::vector<float> Recording; // Create a vector to hold the recorded audio data
+                Audio_input(Recording); // Call the audio input function to fill the Recording vector with audio data
                 break;
             case '2':
                 std::cout << "Exiting Tonality. Goodbye!\n";
