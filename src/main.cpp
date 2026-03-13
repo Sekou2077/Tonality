@@ -4,7 +4,6 @@
 #include <iostream>
 #include "Audio_processing/Music_input.h"
 
-using namespace std;
 
 int main() {
 
