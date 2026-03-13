@@ -5,6 +5,8 @@
 #include "Audio_processing/Music_input.h"
 
 
+std::vector<float> Recording; // Create a vector to hold the recorded audio data
+
 int main() {
 
     std::cout << "Welcome to Tonality a!" << std::endl;
@@ -18,8 +20,7 @@ int main() {
 
         switch (choice) {
             case '1':
-                std::vector<float> Recording; // Create a vector to hold the recorded audio data
-                Recording.clear(); // Clear the vector to ensure it's empty before recording
+                Recording.clear(); // Clear the Recording vector before recording new audio data
                 Audio_input(Recording); // Call the audio input function to fill the Recording vector with audio data
                 break;
             case '2':
