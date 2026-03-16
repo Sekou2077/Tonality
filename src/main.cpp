@@ -9,7 +9,7 @@ std::vector<float> Recording; // Create a vector to hold the recorded audio data
 
 int main() {
 
-    std::cout << "Welcome to Tonality a!" << std::endl;
+    std::cout << "Welcome to Tonality test!" << std::endl;
     char choice;
     do {
         std::cout << "Please select an option:\n";
