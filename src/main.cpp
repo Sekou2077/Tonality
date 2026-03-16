@@ -14,7 +14,8 @@ int main() {
     do {
         std::cout << "Please select an option:\n";
         std::cout << "1. Record music\n";
-        std::cout << "2. Exit\n";
+        std::cout << "2. Process music (DSP)\n";
+        std::cout << "3. Exit\n";
         std::cout << "Enter your choice: ";
         std::cin >> choice;
 
@@ -24,13 +25,16 @@ int main() {
                 Audio_input(Recording); // Call the audio input function to fill the Recording vector with audio data
                 break;
             case '2':
+                Dsp(); // Call the DSP function to process the recorded audio data
+                break;
+            case '3':
                 std::cout << "Exiting Tonality. Goodbye!\n";
                 break;
             default:
                 std::cout << "Invalid choice. Please try again.\n";
                 break;
         }
-    } while (choice != '2');
+    } while (choice != '3');
 
 
 
