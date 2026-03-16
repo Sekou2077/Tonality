@@ -14,7 +14,10 @@ add_executable(Tonality src/main.cpp
 # find PortAudio package
 find_package(portaudio CONFIG REQUIRED)
 
+# Find FFTW3 package
+find_package(FFTW3 CONFIG REQUIRED)
 
-# Link against PortAudio
-target_link_libraries(Tonality PRIVATE portaudio)
+
+# Link against PortAudio and FFTW3 libraries
+target_link_libraries(Tonality PRIVATE portaudio FFTW3::fftw3)
 
