@@ -9,7 +9,8 @@ project(Tonality LANGUAGES CXX)
 
 # Add the executable target
 add_executable(Tonality src/main.cpp
-                    src/Audio_processing/Music_input.cpp)
+                    src/Audio_processing/Music_input.cpp
+                    src/Audio_processing/Dsp.cpp)
 
 # find PortAudio package
 find_package(portaudio CONFIG REQUIRED)
