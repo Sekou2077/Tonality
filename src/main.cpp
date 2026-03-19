@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Audio_processing/Music_input.h"
+#include "Audio_processing/Dsp.h"
 
 
 std::vector<float> Recording; // Create a vector to hold the recorded audio data
@@ -25,7 +26,7 @@ int main() {
                 Audio_input(Recording); // Call the audio input function to fill the Recording vector with audio data
                 break;
             case '2':
-                Dsp(); // Call the DSP function to process the recorded audio data
+                Dsp(Recording); // Call the DSP function to process the recorded audio data
                 break;
             case '3':
                 std::cout << "Exiting Tonality. Goodbye!\n";

@@ -1,13 +1,15 @@
 // DSP file to handle digital signal processing tasks such as FFT, magnitude , frequency bin calculation, etc.
 
 #include <fftw3.h>
-#include "Audio_processing/Music_input.h"
+#include "Music_input.h"
+#include <vector>
+#include <iostream>
+#include <stdexcept>
 
-void Dsp()
+void Dsp(std::vector<float>& Recording)
 {
 //Declare a plan for the FFT
-fftw_plan plan;
-
+fftwf_plan plan = nullptr; 
 
 int N = Recording.size(); // Get the size of the recorded audio data
 
@@ -20,16 +22,16 @@ try
 
 
     // Allocate memory for the FFT output
-    fftw_complex* fft_result = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * (N / 2 + 1));
+    fftwf_complex* fft_result = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * (N / 2 + 1));
 
-    // Create a plan for the FFT(real(audio samples) to complex)
-    plan = fftw_plan_dft_r2c_1d(N, Recording.data(), fft_result, FFTW_ESTIMATE);
+    // Create a plan for the FFT(real(audio samples) to complex(FFT output))
+    plan = fftwf_plan_dft_r2c_1d(N, Recording.data(), fft_result, FFTW_ESTIMATE);
 
     // Execute the FFT
-    fftw_execute(plan);
+    fftwf_execute(plan);
 
     // Clean up the FFT plan
-    fftw_destroy_plan(plan);
+    fftwf_destroy_plan(plan);
 
 }
 
@@ -37,7 +39,7 @@ try
 catch (const std::exception& e) {
     std::cout << "Error in DSP processing: " << e.what() << std::endl;
     if (plan) {
-        fftw_destroy_plan(plan);
+        fftwf_destroy_plan(plan);
     }
     return;
   }
