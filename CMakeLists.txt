@@ -15,10 +15,13 @@ add_executable(Tonality src/main.cpp
 # find PortAudio package
 find_package(portaudio CONFIG REQUIRED)
 
-# Find FFTW3 package
-find_package(FFTW3 CONFIG REQUIRED)
+# Set the CMake module path to include the directory where the findfftw.cmake module is located
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/CMake/Modules/findfftw")
+
+# Find FFTW3 float package
+find_package(FFTW REQUIRED COMPONENTS FLOAT_LIB)
 
 
 # Link against PortAudio and FFTW3 libraries
-target_link_libraries(Tonality PRIVATE portaudio FFTW3::fftw3)
+target_link_libraries(Tonality PRIVATE portaudio FFTW::Float)
 

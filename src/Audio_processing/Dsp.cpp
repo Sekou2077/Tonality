@@ -33,6 +33,10 @@ try
     // Clean up the FFT plan
     fftwf_destroy_plan(plan);
 
+    // Free the FFT output memory
+    fftwf_free(fft_result);
+
+
 }
 
 
