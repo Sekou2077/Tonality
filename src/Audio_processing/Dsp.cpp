@@ -22,9 +22,7 @@ void hann_window(std::vector<float>& Recording) {
 
 void Dsp(std::vector<float>& Recording)
 {
-    
-// Apply the Hann window to the recorded audio data(in-place)
-hann_window(Recording);
+
 
 //Declare a plan for the FFT
 fftwf_plan plan = nullptr; 
@@ -37,7 +35,10 @@ try
     if (N == 0) {
         throw std::runtime_error("No audio data to process.");
     }
-
+     
+    
+    // Apply the Hann window to the recorded audio data(in-place)
+    hann_window(Recording);
 
     // Allocate memory for the FFT output
     fftwf_complex* fft_result = (fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex) * (N / 2 + 1));
