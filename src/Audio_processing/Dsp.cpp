@@ -20,12 +20,15 @@ void hann_window(std::vector<float>& Recording) {
 }
 
 
-void Dsp(std::vector<float>& Recording)
+std::vector<float> Dsp(std::vector<float>& Recording)
 {
 
 
 //Declare a plan for the FFT
 fftwf_plan plan = nullptr; 
+
+//Declare magnitude vector to hold the magnitude of the FFT results
+std::vector<float> magnitude;
 
 int N = Recording.size(); // Get the size of the recorded audio data
 
@@ -51,8 +54,19 @@ try
     // Create a plan for the FFT(real(audio samples) to complex(FFT output))
     plan = fftwf_plan_dft_r2c_1d(N, Recording.data(), fft_result, FFTW_ESTIMATE);
 
+
     // Execute the FFT
     fftwf_execute(plan);
+
+    // Calculate the magnitude of the FFT results
+    int num_bins = N / 2 + 1; // Number of frequency bins for real-to-complex FFT
+    magnitude.resize(num_bins);
+    for (int i = 0; i < num_bins; ++i) {
+        float real_part = fft_result[i][0]; // Real part of the FFT output
+        float imag_part = fft_result[i][1]; // Imaginary part of the FFT output
+        magnitude[i] = sqrtf(real_part * real_part + imag_part * imag_part); // Magnitude calculation(sqrt(re^2 + im^2))
+    }
+
 
     // Clean up the FFT plan
     fftwf_destroy_plan(plan);
@@ -72,6 +86,6 @@ catch (const std::exception& e) {
     return;
   }
 
-
+  return magnitude; // Return the magnitude vector containing the FFT results
 
 }

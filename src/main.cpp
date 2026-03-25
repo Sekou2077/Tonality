@@ -13,7 +13,7 @@ int main() {
     std::cout << "Welcome to Tonality test!" << std::endl;
     char choice;
     do {
-        std::cout << "Please select an option:\n";
+        std::cout << "Please start a recording first and then process it :\n";
         std::cout << "1. Record music\n";
         std::cout << "2. Process music (DSP)\n";
         std::cout << "3. Exit\n";
@@ -26,7 +26,10 @@ int main() {
                 Audio_input(Recording); // Call the audio input function to fill the Recording vector with audio data
                 break;
             case '2':
-                Dsp(Recording); // Call the DSP function to process the recorded audio data
+                std::vector<float> magnitude = Dsp(Recording); // Call the DSP function to process the recorded audio data and get the magnitude of the FFT results
+
+
+
                 break;
             case '3':
                 std::cout << "Exiting Tonality. Goodbye!\n";
