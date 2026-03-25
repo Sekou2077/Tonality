@@ -83,7 +83,8 @@ catch (const std::exception& e) {
     if (plan) {
         fftwf_destroy_plan(plan);
     }
-    return;
+    return magnitude; // Return an empty magnitude vector in case of error
+
   }
 
   return magnitude; // Return the magnitude vector containing the FFT results
