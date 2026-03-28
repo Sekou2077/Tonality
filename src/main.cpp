@@ -26,9 +26,32 @@ int main() {
                 Audio_input(Recording); // Call the audio input function to fill the Recording vector with audio data
                 break;
             case '2':
-                std::vector<float> magnitude = Dsp(Recording); // Call the DSP function to process the recorded audio data and get the magnitude of the FFT results
+                try
+                {
+                    if (Recording.empty()) {
+                        throw std::runtime_error("No audio data to process. Please record music first.");
+                    }
+
+                    std::vector<std::vector<float>>Create_frames(std::vector<float>& Recording, int frame_size, int hop_size); // Create frames from the recorded audio data using the specified frame size and hop size
+                {
+                    int frame_size = 1024; // Define the size of each frame (number of samples per frame)
+                    int hop_size = 512; // Define the hop size (number of samples to move for the next frame, 50% overlap in this case)
+
+                    // Create frames from the recorded audio data
+                    std::vector<std::vector<float>> frames;
+
+                    for (size_t i = 0; i + frame_size <= Recording.size(); i += hop_size) {
+                        frames.emplace_back(Recording.begin() + i, Recording.begin() + i + frame_size);
+                    }
+
+                }
 
 
+                }
+                catch (const std::exception& e) {
+                    std::cerr << "Error: " << e.what() << std::endl;
+                    break; // Exit the case if there's an error
+                }
 
                 break;
             case '3':
