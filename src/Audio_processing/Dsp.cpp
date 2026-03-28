@@ -33,6 +33,9 @@ std::vector<float> magnitude;
 
 int N = Recording.size(); // Get the size of the recorded audio data
 
+if (N == 0) {
+        throw std::runtime_error("Cannot proceed, no audio data available.");
+    }
 
 // Apply the Hann window to the recorded audio data(in-place)
 hann_window(Recording);
