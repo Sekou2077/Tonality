@@ -1,4 +1,4 @@
-// DSP file to handle digital signal processing tasks such as FFT, magnitude , frequency bin calculation, etc.
+// DSP file to handle digital signal processing tasks such as applying a window function and performing the FFT on the recorded audio data.
 
 #include <fftw3.h>
 #include "Music_input.h"

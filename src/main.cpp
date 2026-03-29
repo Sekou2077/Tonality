@@ -32,10 +32,10 @@ int main() {
     char choice;
     do {
         std::cout << "Please start a recording first and then process it :\n";
-        std::cout << "1. Record music or record again\n";
-        std::cout << "2. Process music (DSP)\n";
+        std::cout << "1. Record audio or (re-record)\n";
+        std::cout << "2. Process audio data (DSP)\n";
         std::cout << "3. Exit\n";
-        std::cout << "Enter your choice: ";
+        std::cout << "What would you like to do?\n";
         std::cin >> choice;
 
         switch (choice) {
@@ -47,7 +47,7 @@ int main() {
                 try
                 {
                     if (Recording.empty()) {
-                        throw std::runtime_error("No audio data to process. Please record music first.");
+                        throw std::runtime_error("No audio data to process. Please record audio first.");
                     }
 
                     int frame_size = 1024; // Define the size of each frame (number of samples per frame)
@@ -64,7 +64,7 @@ int main() {
                 }
                 catch (const std::exception& e) {
                     std::cerr << "Error: " << e.what() << std::endl;
-                    break; // Exit the case if there's an error
+                    break;
                 }
 
                 break;
