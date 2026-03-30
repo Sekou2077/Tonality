@@ -13,20 +13,6 @@ std::vector<float> Recording; // Create a vector to hold the recorded audio data
 
 
 
-std::vector<std::vector<float>>Create_frames(const std::vector<float>& recording, int frame_size, int hop_size)// Create frames from the recorded audio data using the specified frame size and hop size
-                {
-                    // Create frames from the recorded audio data
-                    std::vector<std::vector<float>> frames;
-
-                    for (size_t i = 0; i + frame_size <= recording.size(); i += hop_size) {
-                        frames.emplace_back(recording.begin() + i, recording.begin() + i + frame_size);
-                    }
-
-                    return frames; // Return the vector of frames
-                }
-
-
-
 int main() {
 
     std::cout << "Welcome to Tonality test!" << std::endl;

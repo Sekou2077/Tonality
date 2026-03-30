@@ -19,6 +19,20 @@ void hann_window(std::vector<float>& Recording) {
     }
 }
 
+// Function to create frames from the recorded audio data using the specified frame size and hop size. This is necessary for processing the audio data in manageable chunks for the FFT and subsequent DSP tasks.
+std::vector<std::vector<float>>Create_frames(const std::vector<float>& recording, int frame_size, int hop_size)// Create frames from the recorded audio data using the specified frame size and hop size
+                {
+                    // Create frames from the recorded audio data
+                    std::vector<std::vector<float>> frames;
+
+                    for (size_t i = 0; i + frame_size <= recording.size(); i += hop_size) {
+                        frames.emplace_back(recording.begin() + i, recording.begin() + i + frame_size);
+                    }
+
+                    return frames; // Return the vector of frames
+                }
+
+
 
 
 std::vector<float> Dsp(std::vector<float>& Recording)
