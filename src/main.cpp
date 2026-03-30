@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Audio_processing/Music_input.h"
 #include "Audio_processing/Dsp.h"
+#include "Audio_processing/Onset_detection.cpp"
 #include <vector>
 #include <stdexcept>
 
@@ -89,6 +90,14 @@ int main() {
                  // (test) Print the maximum sample value in the original recording for reference
                  float max_sample = *std::max_element(Recording.begin(), Recording.end());
                  std::cout << "Max sample value: " << max_sample << "\n";
+
+                 auto onsets = Onset_detection(flux); // Call the onset detection function with the calculated spectral flux values to identify onsets in the audio signal
+                 // (test) Print the detected onsets for verification
+                 std::cout << "Detected onsets at frame indices: ";
+                 for (int onset : onsets) {
+                     std::cout << onset << " ";
+                 }
+                 std::cout << "\n";
 
                 }
 
