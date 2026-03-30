@@ -42,6 +42,12 @@ int main() {
             case '1':
                 Recording.clear(); // Clear the Recording vector before recording new audio data
                 Audio_input(Recording); // Call the audio input function to fill the Recording vector with audio data
+                std::cout << "Recording size: " << Recording.size() << "\n";
+                // (test) Print the first few samples of the recorded audio data for verification
+                for (int i = 0; i < 10; ++i)
+                {
+                    std::cout << "sample[" << i << "] = " << Recording[i] << "\n";
+                }
                 break;
             case '2':
                 try
@@ -61,7 +67,32 @@ int main() {
                     }
 
                     std::cout<<"Size of magnitude frames: "<<magnitude_frames.size()<<std::endl; //(test)Print the size of the magnitude frames vector to verify that processing was done
+
+                    std::vector<float>flux; // Create a vector to hold the spectral flux values for each frame
+                    for (size_t i = 1; i < magnitude_frames.size(); ++i) {
+                        float flux_value = 0.0f; // Initialize the spectral flux value for the current frame
+                        for (size_t j = 0; j < magnitude_frames[i].size(); ++j) {
+                            float diff = magnitude_frames[i][j] - magnitude_frames[i - 1][j]; // Calculate the difference in magnitude between the current frame and the previous frame
+                            if (diff > 0) {
+                                flux_value += diff; // Accumulate only positive differences to calculate the spectral flux for onset detection
+                            }
+                        }
+                        flux.push_back(flux_value); // Store the accumulated spectral flux value for the current frame
+                    }
+                    std::cout<<"Size of spectral flux vector: "<<flux.size()<<std::endl; //(test)Print the size of the spectral flux vector to verify that it was calculated correctly
+
+                    //(test) Print the first few spectral flux values for verification
+                    for (size_t i = 0; i < std::min(flux.size(), size_t(10)); ++i)
+                    {
+                        std::cout << "flux[" << i << "] = " << flux[i] << "\n";
+                    }
+                 // (test) Print the maximum sample value in the original recording for reference
+                 float max_sample = *std::max_element(Recording.begin(), Recording.end());
+                 std::cout << "Max sample value: " << max_sample << "\n";
+
                 }
+
+
                 catch (const std::exception& e) {
                     std::cerr << "Error: " << e.what() << std::endl;
                     break;

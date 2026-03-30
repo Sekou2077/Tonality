@@ -1,4 +1,4 @@
-// Audio processing implementation files 
+// Audio processing implementation files
 
 #include <iostream>
 #include <portaudio.h>
@@ -7,7 +7,7 @@
 
 
 int Audio_input(std::vector<float>& Recording) {
-    
+
      // Initialize PortAudio
      PaError err = Pa_Initialize();
      // Return an error code if initialization fails
@@ -15,7 +15,7 @@ int Audio_input(std::vector<float>& Recording) {
         std::cout << "PortAudio init failed!\n";
         return 1;
     }
- 
+
     // set up input parameters
     PaStreamParameters inputParameters;
     inputParameters.device = Pa_GetDefaultInputDevice(); // default input device
@@ -23,14 +23,17 @@ int Audio_input(std::vector<float>& Recording) {
     inputParameters.sampleFormat = paFloat32; // 32 bit floating point compatible with most audio APIs
     inputParameters.suggestedLatency = Pa_GetDeviceInfo(inputParameters.device)->defaultLowInputLatency;// use default low latency settings
     inputParameters.hostApiSpecificStreamInfo = NULL; // no specific stream info
-    
+
+     // Print the name of the input device being used for recording
+    std::cout << "Input device used: " << Pa_GetDeviceInfo(inputParameters.device)->name << "\n";
+
     // Define constants for sample rate ,frames per buffer and recording duration
     const int Sample_rate = 44100; // standard CD quality sample rate
     const int Frames_per_buffer = 256; // small buffer size for low latency
     const int Recording_duration_seconds = 5; // record for 60 seconds
 
     //declare a buffer to hold the recorded audio data
-    std::vector<float> Sampleblock(Frames_per_buffer * inputParameters.channelCount); 
+    std::vector<float> Sampleblock(Frames_per_buffer * inputParameters.channelCount);
 
 
     // Declare a stream pointer
@@ -70,7 +73,6 @@ int Audio_input(std::vector<float>& Recording) {
 
 
     // Main audio processing loop
-
     for (int i=0; i < (Recording_duration_seconds * Sample_rate) / Frames_per_buffer; ++i)
      {
         err=Pa_ReadStream(stream, Sampleblock.data(), Frames_per_buffer);
@@ -83,7 +85,6 @@ int Audio_input(std::vector<float>& Recording) {
         Recording.insert(Recording.end(), Sampleblock.begin(), Sampleblock.end());
 
     }
-
 
 
     // Stop the stream
