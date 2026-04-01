@@ -3,14 +3,15 @@
 # Minimum CMake version required
 cmake_minimum_required(VERSION 3.16)
 
-# Project name 
+# Project name and language
 project(Tonality LANGUAGES CXX)
 
 
 # Add the executable target
 add_executable(Tonality src/main.cpp
                     src/Audio_processing/Music_input.cpp
-                    src/Audio_processing/Dsp.cpp)
+                    src/Audio_processing/Dsp.cpp
+                    src/Audio_processing/Onset_detection_timestamps.cpp)
 
 # find PortAudio package
 find_package(portaudio CONFIG REQUIRED)

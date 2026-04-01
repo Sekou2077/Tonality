@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Audio_processing/Music_input.h"
 #include "Audio_processing/Dsp.h"
-#include "Audio_processing/Onset_detection.cpp"
+#include "Audio_processing/Onset_detection_timestamps.h"
 #include <vector>
 #include <stdexcept>
 
@@ -45,7 +45,7 @@ int main() {
 
                     int frame_size = 1024; // Define the size of each frame (number of samples per frame)
                     int hop_size = 512; // Define the hop size (number of samples to move for the next frame, 50% overlap in this case)
-
+                    int sample_rate = 44100; // Define the sample rate of the audio data (samples per second)
 
                     auto frames = Create_frames(Recording, frame_size, hop_size); // Create frames from the recorded audio data
                     std::vector<std::vector<float>> magnitude_frames; // Create a vector to hold the magnitude of each frame for DSP processing
@@ -85,7 +85,17 @@ int main() {
                  }
                  std::cout << "\n";
 
+
+                auto timestamps = timestamp_to_seconds(onsets, sample_rate, hop_size, frame_size); // Convert the detected onset frame indices to timestamps in seconds using the sample rate, hop size, and frame size
+               // (test) Print the detected onsets as timestamps in seconds for verification
+                std::cout << "Detected onsets at timestamps (seconds): ";
+                for (float timestamp : timestamps) {
+                    std::cout << timestamp << " ";
                 }
+                std::cout << "\n";
+
+
+            }
 
 
                 catch (const std::exception& e) {

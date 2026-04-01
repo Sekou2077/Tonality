@@ -1,5 +1,6 @@
 // Function to perform onset detection using spectral flux
 //onsets are detected when the spectral flux exceeds a specified threshold, indicating a significant change in the audio signal that may correspond to a musical event such as a note onset or beat.
+// Time-stamping the detected onsets allows us to know exactly when these events occur in the audio signal
 
 #include <vector>
 
@@ -26,3 +27,14 @@ std::vector<int> Onset_detection(const std::vector<float>& flux, float multiplie
 
     return onsets;
 }
+
+
+// Convert frame index to timestamp in seconds
+std::vector <float> timestamp_to_seconds(const std::vector<int>& frame_indices, int sample_rate, int hop_size, int frame_size) {
+    std::vector<float> timestamps;
+    for (int frame_index : frame_indices) {
+        timestamps.push_back((frame_index * hop_size + frame_size / 2) / static_cast<float>(sample_rate));
+    }
+    return timestamps;
+}
+
