@@ -11,7 +11,8 @@ project(Tonality LANGUAGES CXX)
 add_executable(Tonality src/main.cpp
                     src/Audio_processing/Music_input.cpp
                     src/Audio_processing/Dsp.cpp
-                    src/Audio_processing/Onset_detection_timestamps.cpp)
+                    src/Audio_processing/Onset_detection_timestamps.cpp
+                    src/Audio_processing/Chroma_vector.cpp)
 
 # find PortAudio package
 find_package(portaudio CONFIG REQUIRED)

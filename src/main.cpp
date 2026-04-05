@@ -5,6 +5,7 @@
 #include "Audio_processing/Music_input.h"
 #include "Audio_processing/Dsp.h"
 #include "Audio_processing/Onset_detection_timestamps.h"
+#include "Audio_processing/Chroma_vector.h"
 #include <vector>
 #include <stdexcept>
 
@@ -93,6 +94,7 @@ int main() {
                     std::cout << timestamp << " ";
                 }
                 std::cout << "\n";
+
 
 
             }
