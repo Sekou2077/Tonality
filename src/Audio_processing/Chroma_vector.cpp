@@ -1,6 +1,6 @@
 //Chroma vector creation function implementation file
-# include <vector>
-# include <cmath>
+#include <vector>
+#include <cmath>
 
 
 // Function to compute the chroma vector for a given magnitude spectrum
@@ -9,7 +9,7 @@ std::vector<float> compute_chroma(const std::vector<float>& magnitude, int sampl
     std::vector<float> chroma(12, 0.0f);// Initialize a vector of size 12 to hold the chroma values for each pitch class (C, C#, D, D#, E, F, F#, G, G#, A, A#, B)
 
     for (int k = 1; k < magnitude.size(); ++k) {
-        float frequency = static_cast<float>(k) * sample_rate / frame_size;// Calculate the frequency corresponding to the k-th bin of the FFT
+        float frequency = static_cast<float>(k * sample_rate) / frame_size;// Calculate the frequency corresponding to the k-th bin of the FFT
 
         if (frequency < 27.5f || frequency > 4186.0f) {continue;}// Ignore frequencies outside piano range (A0 27.5 Hz to C8 4186.0 Hz)
 
