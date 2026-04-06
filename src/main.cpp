@@ -101,7 +101,14 @@ int main() {
                     chroma_vectors.push_back(compute_chroma(magnitude_frames[onset], sample_rate, frame_size)); // Calculate the chroma vector for each detected onset frame and store it in the chroma_vectors vector
                 }
 
-
+                // (test) Print the first few chroma vectors for verification
+                for (size_t i = 0; i < std::min(chroma_vectors.size(), size_t(5)); ++i) {
+                    std::cout << "Chroma vector for onset " << i << ": ";
+                    for (float value : chroma_vectors[i]) {
+                        std::cout << value << " ";
+                    }
+                    std::cout << "\n";
+                }
             }
 
 
