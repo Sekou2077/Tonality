@@ -56,6 +56,7 @@ int main() {
 
                     std::cout<<"Size of magnitude frames: "<<magnitude_frames.size()<<std::endl; //(test)Print the size of the magnitude frames vector to verify that processing was done
 
+                    // might create a separate function later to unclutter the main function, but for now I'll keep it here for testing purposes
                     std::vector<float>flux; // Create a vector to hold the spectral flux values for each frame
                     for (size_t i = 1; i < magnitude_frames.size(); ++i) {
                         float flux_value = 0.0f; // Initialize the spectral flux value for the current frame
@@ -95,6 +96,10 @@ int main() {
                 }
                 std::cout << "\n";
 
+                std::vector<std::vector<float>> chroma_vectors; // Create a vector to hold the chroma vectors for each frame
+                for(int onset : onsets) {
+                    chroma_vectors.push_back(compute_chroma(magnitude_frames[onset], sample_rate, frame_size)); // Calculate the chroma vector for each detected onset frame and store it in the chroma_vectors vector
+                }
 
 
             }
