@@ -6,6 +6,7 @@
 #include "Audio_processing/Dsp.h"
 #include "Audio_processing/Onset_detection_timestamps.h"
 #include "Audio_processing/Chroma_vector.h"
+#include "Audio_processing/Graph.h"
 #include <vector>
 #include <stdexcept>
 
@@ -109,6 +110,32 @@ int main() {
                     }
                     std::cout << "\n";
                 }
+
+                std::vector<Node> graph_nodes; // Create a vector to hold the nodes of the graph
+                for (size_t i = 0; i < timestamps.size(); ++i) {
+                    Node node; // Create a new node for each detected onset
+                    node.timestamp = timestamps[i]; // Set the timestamp of the node to the corresponding onset timestamp
+                    node.chroma_vector = chroma_vectors[i]; // Set the chroma vector of the node to the corresponding chroma vector calculated for that onset
+                    graph_nodes.push_back(node); // Add the node to the graph_nodes vector
+                }
+
+                // (test) Print the graph nodes with their timestamps and chroma vectors for verification
+                for (size_t i = 0; i < std::min(graph_nodes.size(), size_t(5)); ++i) {
+                    std::cout << "Node " << i << ": Timestamp = " << graph_nodes[i].timestamp << " seconds, Chroma vector = ";
+                    for (float value : graph_nodes[i].chroma_vector) {
+                        std::cout << value << " ";
+                    }
+                    std::cout << "\n";
+                }
+
+                std::vector<Edge> graph_edges; // Create a vector to hold the edges of the graph
+                for (size_t i = 0; i < graph_nodes.size(); ++i)
+                {
+
+
+                }
+
+
             }
 
 
